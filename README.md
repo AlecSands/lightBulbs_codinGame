@@ -28,5 +28,7 @@ Find the minimum number of switches needed to change the pattern from `start` to
 To change pattern from 1101 to 0100
 
 1101 (start)
+
 1100 (switch 4, by Rule 2)
+
 0100 (switch 1, by Rule 1) - reached target by switching 2 times.
