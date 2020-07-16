@@ -39,6 +39,39 @@ function swapVal(ind) {
     }
 }
 
+// Check to see if rule 1 can be run on a certain index
+function isR1Possible(ind) {
+    // Is every lightbulb after the next on off
+    let cond2 = false;
+    const secondSet = c.filter((d, i) => i > ind + 1);
+    const secondSetSum = secondSet.reduce((prev, cur) => prev + cur);
+    if (secondSetSum = 0) {
+        cond2 = true;
+    }
+
+    // Is the next lightbulb on
+    let cond1 = false;
+    if (c[ind+1] == 1) {
+        cond1 = true;
+    }
+
+    // If the conditions are met then implement rule 1
+    if (cond1 && cond2) {
+        implementRule1(ind);
+
+    // If the next lightbulb is on but the remaining are not off then find the first one that needs to be turned off
+    } else if (cond1 && !cond2) {
+
+
+    // If the next lightbulb is off then turn it
+    }
+}
+
+// Run rule 1 on the current pattern
+function implementRule1 (ind) {
+    step++;
+    swapVal(ind);
+}
 
 // Run rule 2 on the current pattern
 function implementRule2 () {
@@ -60,7 +93,9 @@ function doesItMatch() {
 
         // If first mismatch isn't last element then something needs to happen
         if (firstErr != (c.length-1)) {
+            // We can either run rule 1 and then move to finding the next mismatch
 
+            // Or we need to do some prework before rule 1 can be run
 
         // Otherwise, if it is the last element then just change the last element value
         } else {
