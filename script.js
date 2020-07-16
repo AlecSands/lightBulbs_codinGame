@@ -39,34 +39,6 @@ function swapVal(ind) {
     }
 }
 
-// Check to see if rule 1 can be run on a certain index
-function isR1Possible(ind) {
-    // Is every lightbulb after the next on off
-    let cond2 = false;
-    const secondSet = c.filter((d, i) => i > ind + 1);
-    const secondSetSum = secondSet.reduce((prev, cur) => prev + cur);
-    if (secondSetSum = 0) {
-        cond2 = true;
-    }
-
-    // Is the next lightbulb on
-    let cond1 = false;
-    if (c[ind+1] == 1) {
-        cond1 = true;
-    }
-
-    // If the conditions are met then implement rule 1
-    if (cond1 && cond2) {
-        implementRule1(ind);
-
-    // If the next lightbulb is on but the remaining are not off then find the first one that needs to be turned off
-    } else if (cond1 && !cond2) {
-
-
-    // If the next lightbulb is off then turn it
-    }
-}
-
 // Run rule 1 on the current pattern
 function implementRule1 (ind) {
     step++;
@@ -77,6 +49,41 @@ function implementRule1 (ind) {
 function implementRule2 () {
     step++;
     swapVal(c.length-1);
+}
+
+// Check to see if rule 1 can be run on a certain index
+// function isR1Possible(ind) {
+//     // Is every lightbulb after the next on off
+//     let cond2 = false;
+//     const secondSet = c.filter((d, i) => i > ind + 1);
+//     const secondSetSum = secondSet.reduce((prev, cur) => prev + cur);
+//     if (secondSetSum = 0) {
+//         cond2 = true;
+//     }
+
+//     // Is the next lightbulb on
+//     let cond1 = false;
+//     if (c[ind+1] == 1) {
+//         cond1 = true;
+//     }
+
+//     // If the conditions are met then implement rule 1
+//     if (cond1 && cond2) {
+//         implementRule1(ind);
+
+//     // If the next lightbulb is on but the remaining are not off then find the first one that needs to be turned off
+//     } else if (cond1 && !cond2) {
+
+
+//     // If the next lightbulb is off then turn it
+//     }
+// }
+
+// Start changing and checking from the right side till target index is changed
+function rightInward(tarI) {
+    if(c[c.length-1] == 0) {
+
+    }
 }
 
 // Function that checks if there is a match
@@ -91,18 +98,62 @@ function doesItMatch() {
         const firstErr = firstMismatch();
         console.error('first mismatch index: ' + firstErr);
 
-        // If first mismatch isn't last element then something needs to happen
-        if (firstErr != (c.length-1)) {
-            // We can either run rule 1 and then move to finding the next mismatch
-
-            // Or we need to do some prework before rule 1 can be run
-
-        // Otherwise, if it is the last element then just change the last element value
-        } else {
+        // If first mismatch is last index then just call rule 2
+        if (firstErr == c.length-1) {
             implementRule2();
-            doesItMatch();
+            console.log(steps);
+        } else {
+            // Work from the right side in to setup to change first mismatch
+
         }
+
+
+
     }
 }
 
 doesItMatch();
+
+// Thinking
+
+// 00000000000000000000  -> 01000000000000000000000
+// 00000000000000000001    r2
+// 00000000000000000011    r1
+// 00000000000000000010    r2
+// 00000000000000000110    r1
+// 00000000000000000111    r2
+// 00000000000000000101    r1
+// 00000000000000000100    r2
+// 00000000000000001100    r1
+// 00000000000000001101    r2
+// 00000000000000001111    r1
+// 00000000000000001110    r2
+// 00000000000000001010    r1
+// 00000000000000001011    r2
+// 00000000000000001001    r1
+// 00000000000000001000    r2
+// 00000000000000011000    r1
+
+
+// 11111111111111111111  ->  101111111111111111111
+// 11111111111111111101    r1
+// 11111111111111111100    r2
+// 11111111111111110100    r1
+// 11111111111111110101    r2
+// 11111111111111110111    r1
+// 11111111111111110110    r2
+// 11111111111111110010    r1
+// 11111111111111110011    r2
+// 11111111111111110001    r1
+// 11111111111111110000    r2
+// 11111111111111010000    r1
+
+
+// 101010101010 -> 00000000000
+// 101010101011    r2
+// 101010101001    r1
+// 101010101000    r2
+// 101010111000    r1
+// 101010111001    r2
+// 101010111011    r1
+// 101010111010    r2
